@@ -9,17 +9,18 @@ Fixed::Fixed(const Fixed &f)
 {
     std::cout << "Copy constructor called\n";     
     this->value = f.getRawBits();
+    // *this = f; corret
 }
 
 Fixed::Fixed(const int d)
 {
-    this->value = d * 256;
-    std::cout << "stored in memory like this : " << this->value << std::endl; 
+    std::cout << "Int constructor called\n";
+    this->value = d * (1 << bits);
 }
 Fixed::Fixed(const float num)
 {
-    this->value = roundf(num) * 256;
-    std::cout << "stored in memory like this : " << this->value << std::endl;
+    std::cout << "Float constructor called\n";
+    this->value = roundf(num * (1 << bits));
 }
 
 Fixed& Fixed::operator=(const Fixed &f)
@@ -32,24 +33,36 @@ Fixed& Fixed::operator=(const Fixed &f)
     return *this;
 }
 
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+    os << fixed.toFloat();
+    return os;
+}
+
 int Fixed::getRawBits(void) const
 {
-    std::cout << "getRawBits member function called\n";
     return (value);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-    (void)raw;
+    this->value = raw;
 }
 float Fixed::toFloat(void) const
 {
-    return 0;
+    float result;
+
+    result = (float)this->value / (1 << bits);
+    
+    return result;
 }
 
 int Fixed::toInt(void) const
 {
-    return 0;
+    int result;
+    result = this->value / (1 << bits);
+
+    return result;
 }
 
 Fixed::~Fixed()

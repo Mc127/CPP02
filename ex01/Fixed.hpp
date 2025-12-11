@@ -19,7 +19,7 @@ class Fixed
         float toFloat( void ) const;
         int toInt( void ) const;
         ~Fixed();
-};
-
+    };
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 
 #endif
