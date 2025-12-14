@@ -28,7 +28,7 @@ int Fixed::getRawBits(void) const
 
 void Fixed::setRawBits(int const raw)
 {
-    (void)raw;
+    this->value = raw;
 }
 
 Fixed::~Fixed()

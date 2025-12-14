@@ -1,30 +1,23 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed():value(0)
-{
-    std::cout << "Default constructor called\n";
-}
+Fixed::Fixed():value(0){}
 
 Fixed::Fixed(const Fixed &f)
-{
-    std::cout << "Copy constructor called\n";     
+{ 
     this->value = f.getRawBits();
 }
 
 Fixed::Fixed(const int d)
 {
-    std::cout << "Int constructor called\n";
     this->value = d * (1 << bits);
 }
 Fixed::Fixed(const float num)
 {
-    std::cout << "Float constructor called\n";
     this->value = roundf(num * (1 << bits));
 }
 
 Fixed& Fixed::operator=(const Fixed &f)
-{
-    std::cout << "Copy assignment operator called\n";      
+{   
     if (this != &f)
     {
         this->value = f.getRawBits();
@@ -50,9 +43,7 @@ void Fixed::setRawBits(int const raw)
 float Fixed::toFloat(void) const
 {
     float result;
-
     result = (float)this->value / (1 << bits);
-    
     return result;
 }
 
@@ -66,5 +57,47 @@ int Fixed::toInt(void) const
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called\n";
+}
+
+bool Fixed::operator==(Fixed& obj) const
+{
+    if (this->value == obj.value)
+        return (true);
+    else
+        return (false);
+}
+bool Fixed::operator!=(Fixed& obj) const
+{
+    if (this->value != obj.value)
+        return (true);
+    else
+        return (false);
+}
+bool Fixed::operator<=(Fixed& obj) const
+{
+    if (this->value <= obj.value)
+        return (true);
+    else
+        return (false);
+}
+bool Fixed::operator>=(Fixed& obj) const
+{
+    if (this->value >= obj.value)
+        return (true);
+    else
+        return (false);
+}
+bool Fixed::operator<(Fixed& obj) const
+{
+    if (this->value < obj.value)
+        return (true);
+    else
+        return (false);
+}
+bool Fixed::operator>(Fixed& obj) const
+{
+    if (this->value > obj.value)
+        return (true);
+    else
+        return (false);
 }
