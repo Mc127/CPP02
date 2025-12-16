@@ -2,12 +2,16 @@
 
 int main( void ) 
 {
-    Fixed a(3.4f);
-    Fixed b(3.5f);
+    Fixed a;
+    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
-    if(b.operator>(a))
-        std::cout << "yeah\n";
-    else
-        std::cout << "not equal\n";
+    std::cout << a << std::endl;
+    std::cout << ++a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << a++ << std::endl;
+    std::cout << a << std::endl;
+    std::cout << b << std::endl;
+    std::cout << Fixed::max( a, b ) << std::endl;
+
     return 0;
 }
